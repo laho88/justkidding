@@ -4,13 +4,15 @@ const port = 8000;
 
 
 // This will fire our mongoose.connect statement to initialize our database connection
-require("./server/config/mongoose.config");
 
+app.use( express.json() );
+app.use( express.urlencoded({ extended: true }) );
 
-app.get("/api", (req, res) => {
-    res.json({message: "testing testing TESTING!!!!"})
-})
+require("../server/config/mongoose.config");
+require('../server/routes/jokes.routes');
+
 
 app.listen(port, () => {
     console.log({message: `app is staged and set on ${port}`})
-})
+
+});
